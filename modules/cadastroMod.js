@@ -1,5 +1,4 @@
 var Usuario = require('../mongodb/models/usuarioModel');
-var Materia = require('../mongodb/models/materiaModel');
 
 module.exports = {
   usuario: function(req,res) {
@@ -19,14 +18,22 @@ module.exports = {
     });
   },
   materia: function(req,res) {
-    console.log(req.body.usuario.email);
-    Usuario.find({ email: req.body.usuario.email },function(err, result) {
+    var materia = req.body.materia;
+    Usuario.find({ $or: [{ email: req.body.usuario.email, materias: {$elemMatch: {nome: {$ne: materia.nome}}} }, {email: req.body.usuario.email, materias: {$size: 0}}] },function(err, usuarios) {
       if(err){
         res.send('Usuário não encontrado ou não cadastrado');
         return console.log(err);
       }
-      console.log(result);
+      console.log(usuarios);
+      if(usuarios.length > 0){
+        usuarios[0].materias.push(materia);
 
+        usuarios[0].save(function(err,usuarioSalvo) {
+          if (err) return console.log(err);
+            console.log('Success!');
+            res.send(usuarioSalvo);
+        });
+      }
     });
   }
 };

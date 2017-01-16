@@ -1,16 +1,16 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.Schema({
-  codigo: String,
-  nome: String,
+  nome: {type:String, index:true},
   professor: String,
-  criterioAval: String,
+  criterioAval: {mp:Number,mt:Number,me:Number},
   qteProvas: Number,
   qteTrabalhos: Number,
   qteExercicios: Number,
-  dataAula: [{ diaSemana: String, horaAula: { hora: Number, min: Number } }],
+  dataAula: [{ _id:false, diaSemana: String, horaIni: { hora: Number, min: Number }, horaFin: { hora: Number, min: Number } }],
   faltas: {totalAulas: Number, porcFaltas: Number, qtdeFaltas: Number},
-  provas: [{prova: String, data: Date, nota: Number}],
-  trabalhos: [{trabalho: String, data: Date, nota: Number}],
-  exercicios: [{exercicio: String, data: Date, nota: Number}]
+  notaProvas: [Number],
+  notaTrabalhos: [Number],
+  notaExercicios: [Number],
+  arquivado: Boolean
 }, { minimize: false });
