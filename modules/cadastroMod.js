@@ -35,5 +35,26 @@ module.exports = {
         });
       }
     });
+  },
+  tarefa: function(req,res) {
+    var tarefa = req.body.tarefa;
+    Usuario.find({email:req.body.usuario.email},function(err,usuarios) {
+      if(err){
+        res.send(err);
+        return console.log(err);
+      }
+      if(usuarios.length > 0){
+        usuarios[0].tarefas.push(tarefa);
+
+        usuarios[0].save(function(err,usuarioSalvo) {
+          if (err){
+            res.send(err);
+            return console.log(err);
+          };
+          console.log('Success!');
+          res.send(usuarioSalvo);
+        })
+      }
+    })
   }
 };

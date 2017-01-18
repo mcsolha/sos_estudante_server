@@ -8,7 +8,7 @@ var headers = {
 
 // Configure the request
 var options = {
-    url: 'http://192.168.15.107:3000/cadastro/materia',
+    url: 'http://192.168.15.107:3000/alterar/usuario/materia',
     method: 'POST',
     headers: headers,
     form: {
@@ -16,7 +16,7 @@ var options = {
           		email: "bacs96@gmail.com"
           	},
           	materia: {
-          	  nome: "Tasdw",
+          	  nome: "Redes",
           	  professor: "Kelton",
           	  criterioAval: {mp:0.8,mt:0,me:0.2},
           	  qteProvas: 2,
@@ -24,7 +24,7 @@ var options = {
           	  qteExercicios: 0,
           	  dataAula: [{diaSemana: "Segunda", horaIni: { hora: 14, min: 00 }, horaFin: { hora: 18, min: 00 } }],
           	  faltas: {totalAulas: 20, porcFaltas: 0.7, qtdeFaltas: 12},
-          	  notaProvas: [0,8,10],
+          	  notaProvas: [0,8,10,5],
           	  notaTrabalhos: [],
               notaExercicios: [10,0,0.2],
               arquivado: false
